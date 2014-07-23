@@ -18,7 +18,7 @@ webver = '2.1'
 def main():
     return 0
 
-def header():
+def header(menu):
     """default html header"""
     ver=version.split('\n')
     quote=['attacking the shadow healer since \'94.',
@@ -30,19 +30,24 @@ def header():
     print '''<!DOCTYPE html>
 <html lang="en">\n
 \t<head>
-\t\t<meta charset="utf-8"/>
+\t\t<meta charset="utf-8" />
 \t\t<title>VOID:  %s</title>
-\t\t<link rel="icon" href="/favicon.ico" type="image/x-icon">
-\t\t<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-\t\t<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection">
-\t\t<meta name="author" content="Sean Bruen">
-\t\t<meta name="description" content="VOID is running on Worldgroup v3.30-NT with MajorMUD v1.11p!">
-\t\t<meta name="generator" content="Python %s">
-\t\t<meta name="keywords" content="void, majormud, mmud, mud, bbs, worldgroup, tlord, t-lord, Sean Bruen, aftermud, amud">
-\t</head>\n
+\t\t<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+\t\t<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+\t\t<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
+\t\t<meta name="author" content="Sean Bruen" />
+\t\t<meta name="description" content="VOID is running on Worldgroup v3.30-NT with MajorMUD v1.11p!" />
+\t\t<meta name="generator" content="Python %s" />
+\t\t<meta name="keywords" content="void, majormud, mmud, mud, bbs, worldgroup, tlord, t-lord, Sean Bruen, aftermud, amud" />''' % (quote[rand], ver[0].strip())
+    print '\t\t<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>'
+    if menu == 'main':
+        print '\t\t<script src="/js/main.js" charset="utf-8"></script>'
+    else:
+        print '\t\t<script src="/js/other.js" charset="utf-8"></script>'
+    print '''\t</head>\n
 <body>\n
-\t<div id="statusbar"><a href="http://kyau.net/"><img src="/img/github.png"></a></div>
-\t<div id="term">''' % (quote[rand], ver[0].strip())
+\t<div id="statusbar"><a href="https://github.com/kyau/bbs-kyau_net"><img src="/img/github.png"> %s</a></div>
+\t<div id="term">''' % cfg.git_version()
     return 0
 
 def footer(warning):

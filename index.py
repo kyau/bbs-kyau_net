@@ -18,7 +18,7 @@ def main():
         query = 'main'
     else:
         query = environ['QUERY_STRING']
-    html.header()
+    html.header(str(query))
     if query == 'main':
         html.main_v2()
     elif query == 'enter':

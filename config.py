@@ -75,6 +75,12 @@ def sys_stat():
     stats[1] = getoutput('uname -sr')
     return stats
 
+def git_version():
+    """ report back the git commit code """
+    global git
+    git = getoutput('git rev-parse --short HEAD')
+    return git
+
 
 if __name__ == '__main__':
     main()
