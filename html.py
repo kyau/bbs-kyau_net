@@ -202,9 +202,9 @@ def who_v2():
                     xphr = round(kph, 1)
                 exphr = '<span class="xphr">%sk/hr</span>' % str(xphr)
             if tmp[4] == '':
-                print '<span class="line"><span class="%s">%8s</span> <span class="darkgreen">%-20s %s</span>  <span class="darkmagenta">%s</span>%s</span>' % (color, tmp[0], row[0][:20], row[1], tmp[1], exphr)
+                print '<span class="line">%s<span class="%s">%8s</span> <span class="darkgreen">%-20s %s</span>  <span class="darkmagenta">%s</span></span>' % (exphr, color, tmp[0], row[0][:20], row[1], tmp[1])
             else:
-                print '<span class="line"><span class="%s">%8s</span> <span class="darkgreen">%-20s %s</span>  <span class="darkmagenta">%s</span>  <span class="darkgreen">of</span> <span class="darkyellow">%s</span>%s</span>' % (color, tmp[0], row[0][:20], row[1], tmp[1], tmp[4], exphr)
+                print '<span class="line">%s<span class="%s">%8s</span> <span class="darkgreen">%-20s %s</span>  <span class="darkmagenta">%s</span>  <span class="darkgreen">of</span> <span class="darkyellow">%s</span></span>' % (exphr, color, tmp[0], row[0][:20], row[1], tmp[1], tmp[4])
 
     else:
         print '<span class="darkmagenta">There are no users in the game at the moment.</span>'

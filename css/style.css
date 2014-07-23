@@ -98,7 +98,7 @@ span.lightyellow { color: #fadd2d; }
 }
 #statusbar a { color: #ffaa3e; }
 #statusbar a:hover { color: #fadd2d; }
-.line { background-color: #090c19;  }
+.line { background-color: #090c19; display: inline-block; width: 100%; }
 .line:hover { background-color: #222946; }
 .xphr, .idle {
     background-color: inherit;
