@@ -46,7 +46,7 @@ def header(menu):
         print '\t\t<script src="/js/other.js" charset="utf-8"></script>'
     print '''\t</head>\n
 <body>\n
-\t<div id="statusbar"><a href="https://github.com/kyau/bbs-kyau_net"><img src="/img/github.png"> %s</a></div>
+\t<div id="statusbar"><a href="https://github.com/kyau/bbs-kyau_net"><img alt="Github" src="/img/github.png" /> %s</a></div>
 \t<div id="term">''' % cfg.git_version()
     return 0
 
@@ -54,18 +54,20 @@ def footer(warning):
     """ default html footer """
     print '\t</div>'
     if warning:
-        print '\t<div id="help">This is a mock terminal window, use your mouse.</div>'
+        print '\t<div id="msg" style="font-weight:bold">Press <span class="darkcyan">?</span> for help.</div>'
     else:
-        print '\t<div id="help">This *IS* an actual terminal window.</div>'
-    print '''\n</body>\n
+        print '\t<div id="msg">This *IS* an actual terminal window.</div>'
+    print '''\t<div id="help"><img alt="Help!" src="/img/help.png" /></div>
+\n</body>\n
 </html>\n'''
     return 0
 
 def error(e):
     if e == 404:
         print '''\t\t<span class="darkgrey">[</span><a class="menutext" href="/">VOID</a><span class="darkgrey">]</span><span class="lightgrey">:</span> 404<br/>
-\t\t<br/><br/><br/>
-\t\t<img src="/img/404.ANS.png" border="0"><br/><br/><br/><br/>
+\t\t<br/><br/><br/><br/>
+\t\t<img alt="404" src="/img/404.ANS.png" style="margin-left:60px" />
+\t\t<pre>                               <span class="darkcyan" style="font-weight:bold;">404</span><span class="white" style="font-weight:bold;">:</span> <span class="lightgrey">File Not Found</span></pre><br/><br/><br/><br/><br/><br/>
 \t\t<span class="darkgrey">[</span><a class="menutext" href="/">VOID</a><span class="darkgrey">]</span><span class="lightgrey">:</span> <span id="cursor">█</span>'''
         return 0
     else:
@@ -89,7 +91,6 @@ def main_v2():
 \t\t<span class="darkgrey">[</span><a class="menuitem" href="/?who">W</a><span class="darkgrey">] .</span> <a class="menutext" href="/?who">Who\'s in the Realm</a><br/><br/>
 
 \t\t<span class="darkgrey">[</span><a class="menuitem" href="/?realm">!</a><span class="darkgrey">] .</span> <a class="menutext" href="/?realm">Realm Settings</a><br/><br/>
-\t\t<br/>
 \t\t<span class="darkgrey">[</span><a class="menutext" href="/">VOID</a><span class="darkgrey">]</span><span class="lightgrey">:</span> <span id="cursor">█</span>
 \t\t<br/><br/><br/><br/><br/><br/><br/>&nbsp;'''
     return 0
@@ -191,7 +192,7 @@ def who_v2():
             elif tmp[0] == 'FIEND': color = 'lightred'
             else: color = 'white'
             if tmp[2] == tmp[3]:
-                exphr = '<span style="color:#434343;float:right">idle</span>'
+                exphr = '<span class="idle">idle</span>'
             else:
                 xphr = (tmp[2] - tmp[3]) * 12
                 kph = xphr / 1000
@@ -199,7 +200,7 @@ def who_v2():
                     xphr = '%d' % kph
                 else:
                     xphr = round(kph, 1)
-                exphr = '<span class="darkgrey" style="float:right;background-color:inherit;">%sk/hr</span>' % str(xphr)
+                exphr = '<span class="xphr">%sk/hr</span>' % str(xphr)
             if tmp[4] == '':
                 print '<span class="line"><span class="%s">%8s</span> <span class="darkgreen">%-20s %s</span>  <span class="darkmagenta">%s</span>%s</span>' % (color, tmp[0], row[0][:20], row[1], tmp[1], exphr)
             else:
@@ -275,7 +276,7 @@ def topg_v2():
 
 def rules_v2():
     print '<span class="darkgrey">[</span><a class="menutext" href="/">VOID</a><span class="darkgrey">]</span><span class="lightgrey">:</span> I<br/>\n<pre>\n'
-    print '<img src="/img/rules.png" border="0">'
+    print '<img alt="Rules Header" src="/img/rules.png" border="0" />'
     print '<span class="darkgrey">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>'
     print '''
 <span class="lightgrey">     -  You are allowed to create as many characters as you like,
