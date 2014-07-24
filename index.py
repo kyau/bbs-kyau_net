@@ -11,7 +11,7 @@ import html
 
 def main():
     maintenance = 0
-    warning = 1
+    helpmsg = 0
     if maintenance:
         print 'Location: /_blank.py\r\n\r'
     if not environ.has_key('QUERY_STRING'):
@@ -21,11 +21,11 @@ def main():
     html.header(str(query))
     if query == 'main':
         html.main_v2()
+        helpmsg = 1
     elif query == 'enter':
         html.enter_v2()
     elif query == 'flash':
         html.flash_v2()
-        warning = 0
     elif query == 'about':
         html.about_v2()
     elif query == 'gossip':
@@ -42,9 +42,15 @@ def main():
         html.realm_v2()
     elif query == 'files':
         html.files_v2()
+    elif query == 'megamud':
+        html.filesection('mega', 'MegaMud')
+    elif query == 'majormud':
+        html.filesection('mmud', 'MajorMUD')
+    elif query == 'wgserv':
+        html.filesection('wgserv', 'Worldgroup')
     else:
         html.error(404)
-    html.footer(warning)
+    html.footer(helpmsg)
     return 0
 
 

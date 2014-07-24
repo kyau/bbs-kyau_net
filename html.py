@@ -4,7 +4,8 @@
 
 from __future__ import division
 from cgi import escape
-from os import stat
+from commands import getoutput
+from os import listdir, stat
 from random import randrange
 from sys import version
 from time import localtime, strftime
@@ -42,6 +43,10 @@ def header(menu):
     print '\t\t<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>'
     if menu == 'main':
         print '\t\t<script src="/js/main.js" charset="utf-8"></script>'
+    elif menu == 'files':
+        print '\t\t<script src="/js/files.js" charset="utf-8"></script>'
+    elif menu == 'megamud' or menu == 'majormud' or menu == 'wgserv':
+        print '\t\t<script src="/js/section.js" charset="utf-8"></script>'
     else:
         print '\t\t<script src="/js/other.js" charset="utf-8"></script>'
     print '''\t</head>\n
@@ -54,9 +59,9 @@ def footer(warning):
     """ default html footer """
     print '\t</div>'
     if warning:
-        print '\t<div id="msg" style="font-weight:bold">Press <span class="darkcyan">?</span> for help.</div>'
+        print '\t<div id="msg">Press <span class="darkcyan">?</span> for help.</div>'
     else:
-        print '\t<div id="msg">This *IS* an actual terminal window.</div>'
+        print '\t<div id="msg">Press <span class="darkcyan">X</span> to exit to the Main Menu.</div>'
     print '''\t<div id="help"><img alt="Help!" src="/img/help.png" /></div>
 \n</body>\n
 </html>\n'''
@@ -135,8 +140,8 @@ def about_v2():
          Machine, the stats for the system the VM is running on are:</span>\n
 <span class="darkmagenta">                  Intel(R) Core(TM) i3-2130 CPU @ 3.40GHz
                              %s
-                            2 x 1TB HDD (RAID1)
-                            100mbit from OVH.ca</span>\n
+                             2 x 1TB HDD (RAID1)
+                             100mbit from OVH.ca</span>\n
    <span class="darkgrey">%s</span>\n
 <span class="lightgrey">        If you have any questions please direct them to the user Kyau
                 using the Electronic Mail built into the BBS.</span>\n
@@ -351,18 +356,50 @@ def realm_v2():
 def files_v2():
     print '''<span class="white">V O I D</span> <span class="lightyellow">v%s-WEB (%s)</span><br/>
 <span class="lightgrey">{BBS of Legends}</span><br/>
-<span class="darkgreen">*Download Section*</span><br/><br/>
-<span class="darkgrey">[</span><a class="menuitem" href="/files/b2h_v2_1_.3.0.10.zip">B</a><span class="darkgrey">] .</span> <a class="menutext" href="/files/b2h_v2_1_.3.0.10.zip">Blood2HTML v2.3.0.10</a><br/>
-<span class="darkgrey">[</span><a class="menuitem" href="/files/MegaMUD_v1.03u.exe">M</a><span class="darkgrey">] .</span> <a class="menutext" href="/files/MegaMUD_v1.03u.exe">MegaMUD v1.03u</a><br/>
-<span class="darkgrey">[</span><a class="menuitem" href="/files/megamud_keygen.zip">K</a><span class="darkgrey">] .</span> <a class="menutext" href="/files/megamud_keygen.zip">MegaMUD Keygen</a><br/>
-<span class="darkgrey">[</span><a class="menuitem" href="/files/Winterhawks_Paths_Installer_v2_1_.0.zip">P</a><span class="darkgrey">] .</span> <a class="menutext" href="/files/Winterhawks_Paths_Installer_v2_1_.0.zip">Winterhawks Mod9 Path Updates</a><br/><br/>
-<span class="darkgrey">[</span><a class="menuitem" href="/files/Winterhawks word maps 1.11o 6-1.zip">1</a><span class="darkgrey">] .</span> <a class="menutext" href="/files/Winterhawks word maps 1.11o 6-1.zip">Winterhawks v1.11o .DOC Maps</a><br/>
-<span class="darkgrey">[</span><a class="menuitem" href="/files/Winterhawks PDF maps 1.11o 6-1.zip">2</a><span class="darkgrey">] .</span> <a class="menutext" href="/files/Winterhawks PDF maps 1.11o 6-1.zip">Winterhawks v1.11o .PDF Maps</a><br/><br/>
-<span class="darkgrey">[</span><a class="menuitem" href="/files/Setup-MME_v1.67.exe">E</a><span class="darkgrey">] .</span> <a class="menutext" href="/files/Setup-MME_v1.67.exe">MajorMUD Explorer v1.67 (Full)</a><br/>
-<span class="darkgrey">[</span><a class="menuitem" href="/files/mudexplr_v1.70.rar">U</a><span class="darkgrey">] .</span> <a class="menutext" href="/files/mudexplr_v1.70.rar">MajorMUD Explorer v1.70 (Upgrade)</a><br/>
-<span class="darkgrey">[</span><a class="menuitem" href="/files/data-v1.11p.exe">D</a><span class="darkgrey">] .</span> <a class="menutext" href="/files/data-v1.11p.exe">MajorMUD Explorer Data Pack (v1.11p)</a><br/><br/>
-<span class="darkgrey">[</span><a class="menuitem" href="/">X</a><span class="darkgrey">] .</span> <a class="menutext" href="/">BBS Main Menu</a><br/><br/>
+<span class="darkgreen">*Download Sections*</span><br/><br/>
+<span class="darkgrey">[</span><a class="menuitem" href="/?megamud">1</a><span class="darkgrey">] .</span> <a class="menutext" href="/?megamud">MegaMud</a><br/>
+<span class="darkgrey">[</span><a class="menuitem" href="/?majormud">2</a><span class="darkgrey">] .</span> <a class="menutext" href="/?majormud">MajorMUD</a><br/>
+<span class="darkgrey">[</span><a class="menuitem" href="/?wgserv">3</a><span class="darkgrey">] .</span> <a class="menutext" href="/?wgserv">Worldgroup</a><br/><br/>
 <span class="darkgrey">[</span><a class="menutext" href="/">VOID</a><span class="darkgrey">]</span><span class="lightgrey">:</span> <span id="cursor">█</span>''' % (webver, mod)
+    return 0
+
+def filesection(section, name):
+    print '''\t\t<span class="darkgrey">[</span><a class="menutext" href="/">VOID</a><span class="darkgrey">]</span><span class="lightgrey">:</span> #<br/>\n
+\t\t<br/><div style="text-align: center"><span class="lightyellow">%s Downloads</span></div><br/>
+\t\t<table>
+\t\t\t<tr>
+\t\t\t\t<td class="filename">Filename</td>
+\t\t\t\t<td class="size">Size</td>
+\t\t\t\t<td class="diz">Description</td>
+\t\t\t</tr>
+\t\t\t<tr>
+\t\t\t\t<td class="colspan="3" style="color: #8c8b89">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</td>
+\t\t\t</tr>''' % name
+
+    files = listdir('files/'+section+'/')
+    files.sort()
+    for file in files:
+        if file.endswith('.ZIP'):
+            fileinfo = stat('files/'+section+'/'+file)
+            filesize = fileinfo.st_size
+            if filesize > 1024:
+                if filesize > 1048476:
+                    filesize = str(round((filesize / 1024 / 1024), 1))+'M'
+                else:
+                    filesize = str(round((filesize / 1024), 1))+'K'
+            else:
+                filesize = str(filesize)+'B'
+            file_id = getoutput('recode -p CP437..html4 < files/'+section+'/'+file[:-4]+'.DIZ')
+            if file_id[-25:] == 'No such file or directory':
+                file_id = getoutput('recode -p CP437..html4 < files/NO.DIZ')
+            print '''\t\t\t<tr class="file">
+\t\t\t\t<td class="filename"><a href="/files/%s/%s">%s</a></td>
+\t\t\t\t<td class="size">%s</td>
+\t\t\t\t<td class="diz">%s</td>
+\t\t\t</tr>''' % (section, file, file, filesize, file_id)
+
+    print '''\t\t</table><br/>
+\t\t<span class="darkgrey">[</span><a class="menutext" href="/">VOID</a><span class="darkgrey">]</span><span class="lightgrey">:</span> <span id="cursor">█</span>'''
     return 0
 
 
