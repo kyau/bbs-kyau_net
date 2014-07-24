@@ -41,6 +41,7 @@ def header(menu):
 \t\t<meta name="generator" content="Python %s" />
 \t\t<meta name="keywords" content="void, majormud, mmud, mud, bbs, worldgroup, tlord, t-lord, Sean Bruen, aftermud, amud" />''' % (quote[rand], ver[0].strip())
     print '\t\t<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>'
+    print '\t\t<script src="/js/global.js" charset="utf-8"></script>'
     if menu == 'main':
         print '\t\t<script src="/js/main.js" charset="utf-8"></script>'
     elif menu == 'files':
@@ -51,7 +52,9 @@ def header(menu):
         print '\t\t<script src="/js/other.js" charset="utf-8"></script>'
     print '''\t</head>\n
 <body>\n
-\t<div id="statusbar"><a href="https://github.com/kyau/bbs-kyau_net"><img alt="Github" src="/img/github.png" /> %s</a></div>
+\t<div id="statusbar"><a href="https://github.com/kyau/bbs-kyau_net"><img
+alt="Github" src="/img/github.png" /></a></div>
+\t<div id="tooltip"><span class="white">Github:</span> kyau/bbs-kyau_net <span class="white">(<span class="lightcyan">%s</span>)</span></div>
 \t<div id="term">''' % cfg.git_version()
     return 0
 
