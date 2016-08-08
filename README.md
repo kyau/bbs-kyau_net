@@ -1,7 +1,7 @@
 # public\_html — bbs\_kyau\_net
     Author:  kyau <kyau@kyau.net>
-    Version: 2.1
-    Date:    2014-07-22T23:57:23-0400
+    Version: 2.2
+    Date:    2016-08-08T13:21:44-0400
 
     Copyright (c)  2014  Sean Bruen.
     Permission is granted to copy, distribute and/or modify this document
@@ -18,12 +18,12 @@ Python webpage for use on `http://bbs.kyau.net/`. This is a resurrected version
 of the original BBS webpage that has been modified to fit the times.
 
 The accompanying python shell script is a telnet bot used to feed MajorMUD 
-information into the SQL database. You will need Python 2.x and MySQL-python
+information into the SQL database. You will need Python 3.5 and MySQL-python
 in order to get the bot working.
 
 ## Attribution / Credits
 
-* [Meslo LG S DZ](https://github.com/andreberg/Meslo-Font) is Copyright &copy; 2009, 2010, 2013 André Berg
+* [Hack](https://github.com/chrissimpkins/Hack) is Copyright &copy; 2015-2016 Christopher Simpkins
 * Sword icon from [Legendora](http://findicons.com/pack/286/legendora) by [Teekatas](http://raindropmemory.deviantart.com/)
 is Freeware<br>
-* [MajorMUD](http://www.majormud.com/) is Copyright &copy; 2014 [Metropolis, Inc.](http://www.metrobbs.com/) and is not affiliated with this site.
+* [MajorMUD](http://www.majormud.com/) is Copyright &copy; 2016 [Metropolis, Inc.](http://www.metrobbs.com/) and is not affiliated with this site.
