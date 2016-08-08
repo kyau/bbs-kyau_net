@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
-import ConfigParser
 import MySQLdb
-from commands import getoutput
+import configparser
+from subprocess import getoutput
 from datetime import datetime, timedelta, tzinfo
 
 config_file = '/home/kyau/public_html/mysql.cfg'
@@ -19,7 +19,8 @@ def main():
 def populate():
     """ populate list with configuration information """
     global mysql
-    cfg = ConfigParser.RawConfigParser(allow_no_value=True)
+    cfg = configparser.ConfigParser(allow_no_value=True)
+    #cfg = ConfigParser.RawConfigParser(allow_no_value=True)
     cfg.read(config_file)
     mysql['host'] = cfg.get('MYSQL', 'host')
     mysql['port'] = int(cfg.get('MYSQL', 'port'))

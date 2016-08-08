@@ -8,3 +8,26 @@
 	  src: url(/css/fonts/MesloLGSDZ-Bold.ttf) format("truetype");
       font-weight: bold;
 }
+
+@font-face {
+    font-family: "Hack";
+    src: url(/css/fonts/Hack-Regular.ttf) format("truetype");
+      font-weight: normal;
+}
+@font-face {
+    font-family: "Hack";
+    src: url(/css/fonts/Hack-Bold.ttf) format("truetype");
+      font-weight: bold;
+}
+@font-face {
+    font-family: "Hack";
+    src: url(/css/fonts/Hack-Italic.ttf) format("truetype");
+      font-weight: normal;
+      font-style: italic;
+}
+@font-face {
+    font-family: "Hack";
+    src: url(/css/fonts/Hack-BoldItalic.ttf) format("truetype");
+      font-weight: bold;
+      font-style: italic;
+}

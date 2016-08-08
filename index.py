@@ -13,8 +13,9 @@ def main():
     maintenance = 0
     helpmsg = 0
     if maintenance:
-        print 'Location: /_blank.py\r\n\r'
-    if not environ.has_key('QUERY_STRING'):
+        print('Location: /_blank.py\r\n\r')
+    #if not environ.has_key('QUERY_STRING'):
+    if environ['QUERY_STRING'] == '':
         query = 'main'
     else:
         query = environ['QUERY_STRING']
@@ -40,6 +41,8 @@ def main():
         html.rules_v2()
     elif query == 'realm':
         html.realm_v2()
+    elif query == 'notes':
+        html.notes_v2()
     elif query == 'files':
         html.files_v2()
     elif query == 'megamud':
@@ -48,6 +51,11 @@ def main():
         html.filesection('mmud', 'MajorMUD')
     elif query == 'wgserv':
         html.filesection('wgserv', 'Worldgroup')
+    elif query == 'aftermud':
+        print('<pre>')
+        with open('AFTERMUD.REL', 'r') as file:
+            print(file.read())
+        print('</pre>')
     else:
         html.error(404)
     html.footer(helpmsg)

@@ -1,8 +1,8 @@
-<connection 
+<connection
 	name="VOID"
 	address="bbs.kyau.net"
 	port="23"
-	socket_server_port="843"
+	socket_server_port="2843"
 	info_graphic="/img/welcome.png"
 	default_font="80x25"
 	columns="80"
